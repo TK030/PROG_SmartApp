@@ -31,32 +31,38 @@ def weerstation():
     temperaturen = []
     
     for dag in range(1, 8):  # dag 1 t/m 7
-        # Vraag temperatuur
-        temp_input = input(f"Wat is op dag {dag} de temperatuur[C]: ")
-        if temp_input == "":
-            print("bye")
-            break
+        # Vraagwaarden voor dezelfde dag blijven we herhalen totdat ze valide zijn
+        while True:
+            # Vraag temperatuur
+            temp_input = input(f"Wat is op dag {dag} de temperatuur[C]: ")
+            if temp_input == "":
+                print("bye")
+                return
 
-        # Vraag windsnelheid
-        wind_input = input(f"Wat is op dag {dag} de windsnelheid[m/s]: ")
-        if wind_input == "":
-            print("bye")
-            break
+            # Vraag windsnelheid
+            wind_input = input(f"Wat is op dag {dag} de windsnelheid[m/s]: ")
+            if wind_input == "":
+                print("bye")
+                return
 
-        # Vraag vochtigheid
-        vocht_input = input(f"Wat is op dag {dag} de vochtigheid[%]: ")
-        if vocht_input == "":
-            print("bye")
-            break
+            # Vraag vochtigheid
+            vocht_input = input(f"Wat is op dag {dag} de vochtigheid[%]: ")
+            if vocht_input == "":
+                print("bye")
+                return
 
-        # Probeer de invoer om te zetten naar getallen
-        try:
-            temp_c = float(temp_input)
-            wind = float(wind_input)
-            vocht = int(vocht_input)
-        except ValueError:
-            print("Ongeldige invoer, probeer opnieuw.")
-            continue
+            # Probeer de invoer om te zetten naar getallen
+            try:
+                temp_c = float(temp_input)
+                wind = float(wind_input)
+                vocht = int(vocht_input)
+            except ValueError:
+                # Geef directe feedback en vraag opnieuw voor dezelfde dag
+                print("Ongeldige invoer, probeer opnieuw.")
+                continue
+
+            # Alle waarden zijn valide, ga verder
+            break
 
         # Bereken Fahrenheit
         temp_f = fahrenheit(temp_c)
